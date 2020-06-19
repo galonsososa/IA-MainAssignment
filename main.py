@@ -1,6 +1,9 @@
 #For the dataset i will use Pandas DataFrame library
 import pandas as pd
 
+#references
+#https://www.geeksforgeeks.org/python-pandas-dataframe/#:~:text=Python%20%7C%20Pandas%20DataFrame,fashion%20in%20rows%20and%20columns.
+
 #Input data for the dataframe
 data = {'Age':['Young', 'Young', 'Young', 'Young','Young','Young','Young','Young'
                 ,'Pre-presbyopia','Pre-presbyopia','Pre-presbyopia','Pre-presbyopia'
@@ -25,5 +28,27 @@ data = {'Age':['Young', 'Young', 'Young', 'Young','Young','Young','Young','Young
  
 # Create DataFrame
 df = pd.DataFrame(data)
+
+#change the dictionary into lower case
+df["Age"]= df["Age"].str.lower()
+df["Prescription"]= df["Prescription"].str.lower()
+df["Tear_rate"]= df["Tear_rate"].str.lower()
+df["Lenses"]= df["Lenses"].str.lower()
+df.columns = df.columns.str.lower()
+
 # Print the output.
-print(df)
+#print(df['age'],df.iloc[:,len(df.columns)-1])
+print()
+
+
+def eval_rel_freq(pair,c,D):
+    attribute = pair[0].lower()
+    value = pair[1].lower()
+    D = D[[attribute,D.iloc[:,len(D.columns)-1]]]
+    for v in D:
+        i = 0
+        if ( v == value):
+            i = i + 1
+    print('appearances for (',attribute,',',value,'): ',i)
+
+eval_rel_freq(('Age','Young'), 'Hard', df)
