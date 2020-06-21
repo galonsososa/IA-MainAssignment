@@ -19,6 +19,6 @@ def eval_rel_freq(pair,c,D):
     p = len(D[(D[result_column_name] == c) & (D[attribute] == value)])
 
     result = p/t
-    print('The relative frequency of the rule: [IF',attribute,'=',value,'THEN Classification =',c,'] is ',result)
+    #print('The relative frequency of the rule: [IF',attribute,'=',value,'THEN Classification =',c,'] is ',result)
     
     return result
