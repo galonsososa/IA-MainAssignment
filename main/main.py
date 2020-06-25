@@ -1,9 +1,6 @@
 import RelativeFrequency
 import DataLenses
 import numpy as np
-eps = np.finfo(float).eps
-from numpy import log2 as log
-from collections import defaultdict
 import pprint
 
 #Import DataFrame from DataLenses class
