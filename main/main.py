@@ -3,16 +3,15 @@ import DataLenses
 import DataMushrooms
 import numpy as np
 import pprint
-import sys
-
-sys.setrecursionlimit(10000)
 
 #Import DataFrame from DataLenses class
 df = DataLenses.df
 
-mushrooms_data = DataMushrooms.data
+#Three subsets for cross-validation
+mushrooms_data1 = DataMushrooms.data1
+mushrooms_data2 = DataMushrooms.data2
+mushrooms_data3 = DataMushrooms.data3
 
-#RelativeFrequency.eval_rel_freq(('Age','Young'), 'Hard', df)
 
 def find_highest(D):
 
@@ -26,7 +25,6 @@ def find_highest(D):
 
     highest_rel_freq = (None,0)
     for classification in classifications:
-        #print('--------------',classification,'--------------')
         for attribute in attributes:
             values = D[attribute].unique()
             for value in values:
@@ -34,7 +32,6 @@ def find_highest(D):
                 relative_frequency = RelativeFrequency.eval_rel_freq((attribute,value),classification, D)
                 if (relative_frequency > highest_rel_freq[1]):
                     highest_rel_freq = (attribute,relative_frequency)
-                #print(attribute,',',value,'::',relative_frequency)
     
     #the attribute with the highest relative frequency
     winner = highest_rel_freq[0]
@@ -73,11 +70,16 @@ def build_tree(D, tree = None):
                            
     return tree
     
+solution_tree1 = build_tree(mushrooms_data1)
+solution_tree2 = build_tree(mushrooms_data2)
+solution_tree3 = build_tree(mushrooms_data3)
 
-pprint.pprint(build_tree(mushrooms_data))
-
-
-
+print('Tree 1:')
+pprint.pprint(solution_tree1)
+print('Tree 2:')
+pprint.pprint(solution_tree2)
+print('Tree 3:')
+pprint.pprint(solution_tree3)
 
 
 

@@ -11,3 +11,6 @@ _https://www.geeksforgeeks.org/python-pandas-dataframe/#:~:text=Python%20%7C%20P
 
 ### Decision Tree building using ID3
 _https://medium.com/@pytholabs/decision-trees-from-scratch-using-id3-python-coding-it-up-6b79e3458de4_
+
+### Mushrooms Dataset
+_https://archive.ics.uci.edu/ml/datasets/Mushroom_

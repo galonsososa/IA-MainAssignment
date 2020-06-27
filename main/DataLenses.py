@@ -25,7 +25,7 @@ data = {'Age':['Young', 'Young', 'Young', 'Young','Young','Young','Young','Young
 # Create DataFrame
 df = pd.DataFrame(data)
 
-#change the dictionary into lower case
+#Change the dictionary into lower case
 df["Age"]= df["Age"].str.lower()
 df["Prescription"]= df["Prescription"].str.lower()
 df["Tear_rate"]= df["Tear_rate"].str.lower()
