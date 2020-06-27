@@ -1,10 +1,16 @@
 import RelativeFrequency
 import DataLenses
+import DataMushrooms
 import numpy as np
 import pprint
+import sys
+
+sys.setrecursionlimit(10000)
 
 #Import DataFrame from DataLenses class
 df = DataLenses.df
+
+mushrooms_data = DataMushrooms.data
 
 #RelativeFrequency.eval_rel_freq(('Age','Young'), 'Hard', df)
 
@@ -43,9 +49,9 @@ def get_subset(df, node,value):
 #default value is an empty tree (only used the first time the function is called)
 def build_tree(D, tree = None):
     node = find_highest(D) 
-    #node = find_winner(D)
     #possible values for 'node'
     node_values = D[node].unique()
+
 
     #creates the tree if it is the first time the function is called (the tree is None)
     if tree is None:                    
@@ -58,7 +64,7 @@ def build_tree(D, tree = None):
         
         #clvalue = solution column value
         #counts: nº of times clvalue appears
-        clValue,counts = np.unique(subset[df.keys()[-1]],return_counts=True)            
+        clValue,counts = np.unique(subset['class'],return_counts=True)
         
         if len(counts)==1:#Checking purity of subset
             tree[node][value] = clValue[0]                                                    
@@ -68,7 +74,9 @@ def build_tree(D, tree = None):
     return tree
     
 
-pprint.pprint(build_tree(df))
+pprint.pprint(build_tree(mushrooms_data))
+
+
 
 
 
