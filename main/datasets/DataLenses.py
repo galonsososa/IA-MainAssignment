@@ -1,7 +1,7 @@
 import pandas as pd
 
 #Input data for the dataframe
-data = {'Age':['Young', 'Young', 'Young', 'Young','Young','Young','Young','Young'
+dictionary = {'Age':['Young', 'Young', 'Young', 'Young','Young','Young','Young','Young'
                 ,'Pre-presbyopia','Pre-presbyopia','Pre-presbyopia','Pre-presbyopia'
                 ,'Pre-presbyopia','Pre-presbyopia','Pre-presbyopia','Pre-presbyopia'
                 ,'Presbyopia','Presbyopia','Presbyopia','Presbyopia','Presbyopia'
@@ -23,11 +23,11 @@ data = {'Age':['Young', 'Young', 'Young', 'Young','Young','Young','Young','Young
                     ,'None','None','Hard','None','Soft','None','None']}
  
 # Create DataFrame
-df = pd.DataFrame(data)
+data = pd.DataFrame(dictionary)
 
 #Change the dictionary into lower case
-df["Age"]= df["Age"].str.lower()
-df["Prescription"]= df["Prescription"].str.lower()
-df["Tear_rate"]= df["Tear_rate"].str.lower()
-df["Lenses"]= df["Lenses"].str.lower()
-df.columns = df.columns.str.lower()
+data["Age"]= data["Age"].str.lower()
+data["Prescription"]= data["Prescription"].str.lower()
+data["Tear_rate"]= data["Tear_rate"].str.lower()
+data["Lenses"]= data["Lenses"].str.lower()
+data.columns = data.columns.str.lower()

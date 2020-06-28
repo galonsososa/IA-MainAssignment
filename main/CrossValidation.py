@@ -1,20 +1,41 @@
-import numpy as np
-import pandas as pd
-import DataMushrooms
-import main
-from sklearn.model_selection import KFold
 import pprint
 
-#Split the model in k = 10 pieces
-kf = KFold(n_splits=10)
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import KFold
 
-#Import mushrooms data
-mushrooms_data = DataMushrooms.data
+import BuildTree
+import datasets.DataMushrooms
 
-#Create an empty list with accuracy values
-scores = []
-#Create a variable for the best result
-best_result = 0
+
+def cross_validation(D):
+    #Split the model in k = 10 pieces
+    kf = KFold(n_splits=10)
+
+    #Create an empty list with accuracy values
+    scores = []
+
+    #Initialize a counter to check which value of 'k' is being executed
+    k = 0
+
+    #kf.split splits using k-fold cross-validation in 10 pieces mushrooms_data, separating test_data from train_data
+    for train_index, test_index in kf.split(D):
+        k = k + 1
+        print('K:',k,'----------------------------------------------------------------')
+        #print('TRAIN:',train_index,'TEST:',test_index) #uncomment this line in case if wanting to check which indexes are 
+        #being used for training and for testing
+        #Store in 'tree' the algorithm solution for the training_data
+        tree = BuildTree.build_tree(D.iloc[train_index,:])
+        pprint.pprint(tree)
+        test(D.iloc[test_index,:],tree,scores)
+   
+    average = sum(scores) / len(scores)
+    print('--------------------------------------------------')
+    best = best_result(scores)
+    print('The average accuracy is',average)
+    print('The best result is',best)
+
+
 
 #Takes the test_data features_columns of a row and follows the trained tree to guess the solution
 def predict(query,tree,default = 1):
@@ -34,8 +55,7 @@ def predict(query,tree,default = 1):
                 return result
 
 #Compare the inputed data (test_data) with the predictions made from the trained tree
-def test(data,tree):
-    global best_result
+def test(data,tree,scores):
     #Create a new dictionary with feature columns (all columns except the classification one)
     features = data.iloc[:,:-1].to_dict(orient = "records")
     
@@ -52,26 +72,14 @@ def test(data,tree):
     #If the prediction_value == test_data_value add 1. After it calculate percentage in respect to the total values
     accuracy = (np.sum(predicted["predicted"].values == data["class"].values)/len(data))*100
     scores.append(accuracy)
-    if (accuracy > best_result):
-        best_result = accuracy
     print('The prediction accuracy is: ',accuracy,'%')
-  
 
-
-def cross_validation():
-    #Initialize a counter to check which value of 'k' is being executed
+def best_result(scores):
     k = 0
-    #kf.split splits using k-fold cross-validation in 10 pieces mushrooms_data, separating test_data from train_data
-    for train_index, test_index in kf.split(mushrooms_data):
+    best = 0
+    for score in scores:
         k = k + 1
-        print('K:',k,'----------------------------------------------------------------')
-        #print('TRAIN:',train_index,'TEST:',test_index) #uncomment this line in case if wanting to check which indexes are 
-        #being used for training and for testing
-        #Store in 'tree' the algorithm solution for the training_data
-        tree = main.build_tree(mushrooms_data.iloc[train_index,:])
-        pprint.pprint(tree)
-        test(mushrooms_data.iloc[test_index,:],tree)
-   
-average = sum(scores) / len(scores)
-print('The average accuracy is',average)
-print('The best result is',best_result)
+        print('k:',k,'has an accuracy of',score)
+        if score > best:
+            best = score
+    return best
