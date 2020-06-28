@@ -7,10 +7,8 @@ import pprint
 #Import DataFrame from DataLenses class
 df = DataLenses.df
 
-#Three subsets for cross-validation
-mushrooms_data1 = DataMushrooms.data1
-mushrooms_data2 = DataMushrooms.data2
-mushrooms_data3 = DataMushrooms.data3
+#Import DataFrame from DataMushrooms class
+mushrooms_data = DataMushrooms.data
 
 
 def find_highest(D):
@@ -69,17 +67,12 @@ def build_tree(D, tree = None):
             tree[node][value] = build_tree(subset) #Calling the function recursively 
                            
     return tree
-    
-solution_tree1 = build_tree(mushrooms_data1)
-solution_tree2 = build_tree(mushrooms_data2)
-solution_tree3 = build_tree(mushrooms_data3)
 
-print('Tree 1:')
-pprint.pprint(solution_tree1)
-print('Tree 2:')
-pprint.pprint(solution_tree2)
-print('Tree 3:')
-pprint.pprint(solution_tree3)
+solution_tree = build_tree(mushrooms_data)
+
+
+#pprint.pprint(solution_tree)
+
 
 
 
