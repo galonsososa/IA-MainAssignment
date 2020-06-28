@@ -1,6 +1,8 @@
 import RelativeFrequency
 import DataLenses
 import DataMushrooms
+
+from CrossValidation import *
 import numpy as np
 import pprint
 
@@ -69,9 +71,10 @@ def build_tree(D, tree = None):
     return tree
 
 solution_tree = build_tree(mushrooms_data)
-
-
 #pprint.pprint(solution_tree)
+
+CrossValidation.cross_validation()
+
 
 
 
