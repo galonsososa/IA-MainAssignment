@@ -1,4 +1,4 @@
-# IA-MainAssignment 2019/2020
+# IA-MainAssignment 2020
 
 ### Gonzalo Alonso Sosa
 
