@@ -58,6 +58,9 @@ def predict(query,tree,default = 1):
 def test(data,tree,scores):
     #Create a new dictionary with feature columns (all columns except the classification one)
     features = data.iloc[:,:-1].to_dict(orient = "records")
+
+    #Obtain the name of the classification attribute
+    classification_column_name = data.iloc[:,len(data.columns)-1].name
     
     #Create a empty DataFrame in whose columns the prediction of the tree are stored
     predicted = pd.DataFrame(columns=["predicted"])
@@ -70,7 +73,7 @@ def test(data,tree,scores):
     #print(predicted["predicted"]) #uncomment this line in case of wanting to check the predictions is making
 
     #If the prediction_value == test_data_value add 1. After it calculate percentage in respect to the total values
-    accuracy = (np.sum(predicted["predicted"].values == data["class"].values)/len(data))*100
+    accuracy = (np.sum(predicted["predicted"].values == data[classification_column_name].values)/len(data))*100
     scores.append(accuracy)
     print('The prediction accuracy is: ',accuracy,'%')
 

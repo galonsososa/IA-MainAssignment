@@ -6,7 +6,7 @@ def eval_rel_freq(pair,c,D):
     value = pair[1].lower()
     c = c.lower()
 
-    #obtain the name of the last column(the result? one)
+    #obtain the name of the last column(result column)
     result_column_name = D.iloc[:,len(D.columns)-1].name
 
     #only leave the result column and the column of the pair
