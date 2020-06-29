@@ -22,7 +22,7 @@ print()
 
 #Build tree using ID3 algorithm for Mushrooms data
 print('Mushrooms data solution tree:')
-#pprint.pprint(BuildTree.build_tree(mushrooms_data))
+pprint.pprint(BuildTree.build_tree(mushrooms_data))
 
 """ Second part: Experimentation """
 
